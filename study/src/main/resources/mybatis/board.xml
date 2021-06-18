@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"><!-- TAG들이 어떻게 사용되는지 알수있다 -->
+
+<mapper namespace="boardTest">
+
+<!-- insert -->
+<insert id="insertBoard" parameterType="model.board.BoardDto">
+	insert into board(title,content,writer,writeDate) values(#{title},#{content},#{writer},NOW())
+</insert>
+
+<!-- list -->
+<select id="selectAll" resultType="model.board.BoardDto">
+	select * from board;
+</select>
+
+<!-- 조회수 증가 -->
+<update id="hitCount" parameterType="int">
+	update board set hit=hit+1 where no=#{no}
+</update>
+
+<!-- content, 글내용보기 -->
+<select id="selectOne" parameterType="int" resultType="model.board.BoardDto">
+	select * from board where no=#{no}
+</select>
+
+<!-- 글수정 -->
+<update id="updateBoard" parameterType="model.board.BoardDto">
+	update board set title=#{title},content=#{content},writer=#{writer} where no#={no}
+</update>
+
+<!-- 글삭제 -->
+<delete id="deleteBoard" parameterType="int">
+	delete from board where no=#{no}
+</delete>
+
+
+</mapper>
+
